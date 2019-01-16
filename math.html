@@ -21,10 +21,30 @@
 		
 	</script>
 	<script>
+		var setting = [
+			{
+				operator: '+',
+				level: 0,
+				enabled: true
+			},
+			{
+				operator: '-',
+				level: 0,
+				enabled: false
+			},
+			{
+				operator: '*',
+				level: 0,
+				enabled: false
+			},
+			{
+				operator: '/',
+				level: 0,
+				enabled: false
+			}
+		];
 
-		var setting = {
-			operators: []
-		};
+		//var enabledSetting = map()
 
 		var right = 0;
 		var total = 0;
@@ -37,14 +57,14 @@
 		// &times; or &#215;
 
 		$(() => {			
-			var ops = getURLParameter('operators');
-            if (ops) {
-                $('#url').val(sourceURL);
-                $('#my_video_1').children().attr('src', sourceURL);
-            }
-			if (setting.operators.length == 0) {
-				setting.operators = ['+'];
-			}
+			//var ops = getURLParameter('operators');
+            //if (ops) {
+                //$('#url').val(sourceURL);
+                //$('#my_video_1').children().attr('src', sourceURL);
+            //}
+			//if (setting.operators.length == 0) {
+			//	setting.operators = ['+'];
+			//}
 
 
 			initNumber();
