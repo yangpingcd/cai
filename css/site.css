@@ -1,0 +1,16 @@
+
+#txtResult {
+    width: 150px;
+}
+#log {
+    margin-top: 10px;
+    font-size: 20px;
+    overflow-y: scroll;
+    height: auto;
+}
+.right {		
+    color: blue;
+}
+.wrong {
+    color: red;
+}
