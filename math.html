@@ -5,6 +5,7 @@
 	<title>math</title>
 	<link rel="stylesheet" type="text/css" href="css/site.css">
 	<script type="text/javascript" src="js/site.js"></script>
+	<script type="text/javascript" src="js/math.js"></script>
 
 	<style>
 		body {
@@ -18,53 +19,42 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 	<!--<script src="jquery.js"></script>-->
 	<script>
-		
-	</script>
-	<script>
-		var setting = [
-			{
-				operator: '+',
-				level: 0,
-				enabled: true
-			},
-			{
-				operator: '-',
-				level: 0,
-				enabled: false
-			},
-			{
-				operator: '*',
-				level: 0,
-				enabled: false
-			},
-			{
-				operator: '/',
-				level: 0,
-				enabled: false
-			}
-		];
 
-		//var enabledSetting = map()
+	</script>
+	<script>		
+		var enabledCalcItems = [];
+		var operatorMap = {
+			'+': '+',
+			'-': '-',
+			'*': '&times;', // &times; or &#215;
+			'/': '&divide;' // &divide; or &#247;
+		}
 
 		var right = 0;
 		var total = 0;
-		var allowDivide = false;
+		var calcItem;
 		var num1;
 		var num2;
-		var operator = 0; // 0=multiple, 1=divide
+		
+		var questionCount=5;
+		var questionArr = [];
 
-		// &divide; or &#247;
-		// &times; or &#215;
-
-		$(() => {			
-			//var ops = getURLParameter('operators');
-            //if (ops) {
-                //$('#url').val(sourceURL);
-                //$('#my_video_1').children().attr('src', sourceURL);
-            //}
-			//if (setting.operators.length == 0) {
-			//	setting.operators = ['+'];
-			//}
+		$(() => {
+			availCalcItems.forEach((item, index) => {
+				var v = getURLParameter(item.name);
+				if (v) {
+					var level = parseInt(v);
+					if (level >=0 ) {
+						item.level = level;
+					}
+				}
+			});
+			
+			enabledCalcItems = availCalcItems.filter(item => item.level >= 0);
+			if (enabledCalcItems.length == 0) {
+				availCalcItems[0].level = 0;
+				enabledCalcItems.push(availCalcItems[0]);
+			}
 
 
 			initNumber();
@@ -77,18 +67,13 @@
 		}
 
 		function initNumber() {
-			num1 = Math.floor((Math.random() * 9) + 1);
-			num2 = Math.floor((Math.random() * 9) + 1);
-			operator = 0;
-			if (Math.random() >= 0.5 && allowDivide) {
-				operator = 1;
-				num1 = num1 * num2;
-			}
-
-
+			var indexCalc = Math.floor(Math.random() * enabledCalcItems.length);
+			calcItem = enabledCalcItems[indexCalc];
+			[num1, num2] = calcItem.initNumber();
+			
 			$("#num1").text(num1);
 			$("#num2").text(num2);
-			$("#operator").html(operator == 0 ? "&times;" : "&divide;");
+			$("#operator").html(operatorMap[calcItem.operator]);
 			$("#txtResult").val("").focus();
 		}
 
@@ -99,8 +84,7 @@
 				return;
 			}
 
-			if ((operator == 0 && num1 * num2 == r) ||
-				(operator == 1 && num1 / num2 == r)) {
+			if (calcItem.isRight(num1, num2, r)) {
 				right++;
 			}
 			total++;
@@ -111,11 +95,10 @@
 		}
 
 		function log(r) {
-			var s = num1 + " " + (operator == 0 ? "&times;" : "&divide;") + " " + num2 + " = " + r;
+			var s = num1 + " " + operatorMap[calcItem.operator] + " " + num2 + " = " + r;
 			var item = $("<div/>").html(s);
 
-			if ((operator == 0 && num1 * num2 == r) ||
-				(operator == 1 && num1 / num2 == r)) {
+			if (calcItem.isRight(num1, num2, r)) {
 				item.addClass("right");
 			} else {
 				item.addClass("wrong");

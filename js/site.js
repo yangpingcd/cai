@@ -10,3 +10,4 @@ function getURLParameter(sParam) {
         }
     }
 }
+
