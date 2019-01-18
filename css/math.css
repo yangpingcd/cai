@@ -1,0 +1,25 @@
+body {
+    font-size: 30px;
+    height: 100%
+}
+table {
+    font-size: 40px;
+}
+input {
+    font-size: 30px;
+}
+
+#txtResult {
+    width: 150px;
+}
+
+td {
+    text-align: center;
+}
+
+.right {		
+    border-color: blue;
+}
+.wrong {
+    border-color: red;
+}
