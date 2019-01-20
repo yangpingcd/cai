@@ -43,7 +43,7 @@
 
         function saveCookie() {
             var saveCheck = function (name, idCheck) {
-                if ($(idCheck).checked) {
+                if ($(idCheck).prop('checked')) {
                     Cookies.set(name,  'true');
                 } else {
                     Cookies.remove(name);
