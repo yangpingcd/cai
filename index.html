@@ -9,21 +9,65 @@
 
     <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>-->
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/js.cookie.js"></script>
 
     <script>
-        $(()=>{
-            var cookie=document.cookie;
-            console.log('cookie='+cookie);
-        })
-
-        function updateRangeInput(elem) {
-            $(elem).prev().text($(elem).val());
-
-            var target=$(elem).attr('for');
-            if (target) {
-                $('#'+target).val($(elem).val());
+        $(function() {
+            var setCheck = function (name, idCheck) {
+                var v = Cookies.get(name);
+                $(idCheck).prop('checked', v ? true : false);
+            }
+            var setLevel = function (name, idRange) {
+                var v = Cookies.get(name);
+                if (v > 0) {
+                    $(idRange).val(v);
+                }
             }
 
+            setCheck('addition', '#chkAddition');
+            setCheck('subtraction', '#chkSubtraction');
+            setCheck('multiplication', '#chkMultiplication');
+            setCheck('division', '#chkDivision');
+
+            setLevel('addition_level', '#rangeAddition');
+            setLevel('subtraction_level', '#rangeSubtraction');
+            setLevel('multiplication_level', '#rangeMultiplication');
+            setLevel('division_level', '#rangeDivision');
+
+            //$('input[type="submit"]').val('new');
+            $('form').on('submit', function(e) {
+                //e.preventDefault();
+                saveCookie();
+            });
+        })
+
+        function saveCookie() {
+            var saveCheck = function (name, idCheck) {
+                Cookies.set(name, $(idCheck).checked ? 'true' : 'false');
+            }
+            var saveLevel = function (name, id) {
+                Cookies.set(name, $(id).val());
+            }
+
+            saveCheck('addition', '#chkAddition');
+            saveCheck('subtraction', '#chkSubtraction');
+            saveCheck('multiplication', '#chkMultiplication');
+            saveCheck('division', '#chkDivision');
+
+            saveLevel('addition_level', "#rangeAddtion");
+            saveLevel('subtraction_level', "#rangeSubtraction");
+            saveLevel('mulitplication_level', "#rangeMultiplication");
+            saveLevel('division_level', "#rangeDivision");
+        }
+
+        function updateRangeInput(elem) {
+            var value = $(elem).val();
+            $(elem).prev().text(value);
+
+            var target = $(elem).attr('for');
+            if (target) {
+                $('#' + target).val(value);
+            }
         }
 
         function onGoMath() {
@@ -33,8 +77,9 @@
 </head>
 
 <body>
-    <h2>Math Test</h2>
-    <form action="math.html" style="padding-left: 20px">
+    <form action="math.html">
+        <h2>Math Test <span><input type="submit" value="Go"></span></h2>
+
         <div class="row">
             <div class="column1">
                 <label class="container">Addition(+)
@@ -44,19 +89,19 @@
             </div>
             <div class="column2">
                 <label>Level </label><label>1</label>
-                <input type="range" id="rngAddition" for="chkAddition" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+                <input type="range" id="rangeAddition" for="chkAddition" min="1" max="9" value="1" oninput="updateRangeInput(this)">
             </div>
         </div>
         <div class="row">
             <div class="column1">
                 <label class="container">Subtraction(-)
-                    <input type="checkbox" id="chkSubtraction" name="subtraction" value="1" >
+                    <input type="checkbox" id="chkSubtraction" name="subtraction" value="1">
                     <span class="checkmark"></span>
                 </label>
             </div>
             <div class="column2">
-                <label>Level </label><label>1</label> 
-                <input type="range" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+                <label>Level </label><label>1</label>
+                <input type="range" id="rangeSubtraction" for="chkSubtraction" min="1" max="9" value="1" oninput="updateRangeInput(this)">
             </div>
         </div>
         <div class="row">
@@ -68,27 +113,30 @@
             </div>
             <div class="column2">
                 <label>Level </label> <label>1</label>
-                <input type="range" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+                <input type="range" id="rangeMultiplication" for="chkMultiplication" min="1" max="9" value="1" oninput="updateRangeInput(this)">
             </div>
         </div>
         <div class="row">
             <div class="column1">
-                <label class="container">Divition(&divide;)
-                    <input type="checkbox" id="chkDivition" name="divition" value="1">
+                <label class="container">Division(&divide;)
+                    <input type="checkbox" id="chkDivision" name="division" value="1">
                     <span class="checkmark"></span>
                 </label>
             </div>
             <div class="column2">
                 <label>Level </label> <label>1</label>
-                <input type="range" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+                <input type="range" id="rangeDivision" for="chkDivision" min="1" max="9" value="1" oninput="updateRangeInput(this)">
             </div>
         </div>
 
-        <div>
-            <label>Count </label> <label>5</label>
-            <input type="range" name="count" min="1" max="30" value="5" oninput="updateRangeInput(this)">
+        <div class="row">
+            <div class="column1">
+                <label>How many tests: </label>
+            </div>
+            <div class="column2"> <label>5</label>
+                <input type="range" name="count" min="1" max="30" value="5" oninput="updateRangeInput(this)">
+            </div>
         </div>
-        <div><input type="submit" value="Go"></div>
     </form>
 </body>
 
