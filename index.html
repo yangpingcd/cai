@@ -12,7 +12,7 @@
     <script type="text/javascript" src="js/js.cookie.js"></script>
 
     <script>
-        $(function() {
+        $(() => {
             var setCheck = function (name, idCheck) {
                 var v = Cookies.get(name);
                 $(idCheck).prop('checked', v ? true : false);
@@ -43,7 +43,11 @@
 
         function saveCookie() {
             var saveCheck = function (name, idCheck) {
-                Cookies.set(name, $(idCheck).checked ? 'true' : 'false');
+                if ($(idCheck).checked) {
+                    Cookies.set(name,  'true');
+                } else {
+                    Cookies.remove(name);
+                }
             }
             var saveLevel = function (name, id) {
                 Cookies.set(name, $(id).val());
