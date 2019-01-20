@@ -2,7 +2,7 @@ class CalcItem {
     constructor(name, operator, generateQuestion) {
         this.name = name;
         this.operator = operator;
-        this.level = -1;
+        this.level = 0;
 
         this.generateQuestion = generateQuestion; // function
     }
@@ -22,10 +22,10 @@ var availCalcItems = [
         function () {
             var n1, n2;
 
-            if (this.level <= 0) {
+            if (this.level <= 1) {
                 n1 = Math.floor((Math.random() * 9) + 1);
                 n2 = Math.floor((Math.random() * 9) + 1);
-            } else if (this.level <= 1) {
+            } else if (this.level <= 2) {
                 n1 = Math.floor((Math.random() * 50) + 1);
                 n2 = Math.floor((Math.random() * 50) + 1);
                 if (n1 > n2) {
@@ -33,7 +33,7 @@ var availCalcItems = [
                 } else {
                     n2 = n2 - n1;
                 }
-            } else if (this.level <= 2) {
+            } else if (this.level <= 3) {
                 n1 = Math.floor((Math.random() * 99) + 1);
                 n2 = Math.floor((Math.random() * 99) + 1);
                 if (n1 > n2) {
@@ -41,7 +41,7 @@ var availCalcItems = [
                 } else {
                     n2 = n2 - n1;
                 }
-            } else if (this.level <= 3) {
+            } else if (this.level <= 4) {
                 n1 = Math.floor((Math.random() * 99) + 1);
                 n2 = Math.floor((Math.random() * 99) + 1);
             } else if (this.level <= 4) {
@@ -64,19 +64,19 @@ var availCalcItems = [
         function () {
             var n1, n2;
 
-            if (this.level <= 0) {
+            if (this.level <= 1) {
                 n1 = Math.floor((Math.random() * 9) + 1);
                 n2 = Math.floor((Math.random() * 9) + 1);
-            } else if (this.level <= 1) {
+            } else if (this.level <= 2) {
                 n1 = Math.floor((Math.random() * 50) + 1);
                 n2 = Math.floor((Math.random() * 50) + 1);
-            } else if (this.level <= 2) {
+            } else if (this.level <= 3) {
                 n1 = Math.floor((Math.random() * 99) + 1);
                 n2 = Math.floor((Math.random() * 99) + 1);
-            } else if (this.level <= 3) {
+            } else if (this.level <= 4) {
                 n1 = Math.floor((Math.random() * 199) + 1);
                 n2 = Math.floor((Math.random() * 199) + 1);
-            } else if (this.level <= 4) {
+            } else if (this.level <= 5) {
                 n1 = Math.floor((Math.random() * 500) + 1);
                 n2 = Math.floor((Math.random() * 500) + 1);
             } else {
@@ -95,26 +95,21 @@ var availCalcItems = [
         function () {
             var n1, n2;
 
-            if (this.level <= 0) {
+            if (this.level <= 1) {
                 n1 = Math.floor((Math.random() * 9) + 1);
                 n2 = Math.floor((Math.random() * 9) + 1);
-            } else if (this.level <= 1) {
+            } else if (this.level <= 2) {
                 n1 = Math.floor((Math.random() * 49) + 1);
                 n2 = Math.floor((Math.random() * 9) + 1);
-            } else if (this.level <= 2) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
             } else if (this.level <= 3) {
                 n1 = Math.floor((Math.random() * 99) + 1);
                 n2 = Math.floor((Math.random() * 99) + 1);
             } else if (this.level <= 4) {
+                n1 = Math.floor((Math.random() * 99) + 1);
+                n2 = Math.floor((Math.random() * 99) + 1);
+            } else if (this.level <= 5) {
                 n1 = Math.floor((Math.random() * 500) + 1);
                 n2 = Math.floor((Math.random() * 500) + 1);
-                if (n1 > n2) {
-                    n1 = n1 - n2;
-                } else {
-                    n2 = n2 - n1;
-                }
             } else {
                 n1 = Math.floor((Math.random() * 999) + 1);
                 n2 = Math.floor((Math.random() * 999) + 1);
@@ -127,20 +122,12 @@ var availCalcItems = [
         function () {
             var n1, n2;
 
-            if (this.level <= 0) {
+            if (this.level <= 1) {
                 n1 = Math.floor((Math.random() * 9) + 1);
                 n2 = Math.floor((Math.random() * 9) + 1);
-            } else if (this.level <= 1) {
+            } else if (this.level <= 2) {
                 n1 = Math.floor((Math.random() * 50) + 1);
                 n2 = Math.floor((Math.random() * 50) + 1);
-                if (n1 > n2) {
-                    n1 = n1 - n2;
-                } else {
-                    n2 = n2 - n1;
-                }
-            } else if (this.level <= 2) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
                 if (n1 > n2) {
                     n1 = n1 - n2;
                 } else {
@@ -149,14 +136,17 @@ var availCalcItems = [
             } else if (this.level <= 3) {
                 n1 = Math.floor((Math.random() * 99) + 1);
                 n2 = Math.floor((Math.random() * 99) + 1);
-            } else if (this.level <= 4) {
-                n1 = Math.floor((Math.random() * 500) + 1);
-                n2 = Math.floor((Math.random() * 500) + 1);
                 if (n1 > n2) {
                     n1 = n1 - n2;
                 } else {
                     n2 = n2 - n1;
                 }
+            } else if (this.level <= 4) {
+                n1 = Math.floor((Math.random() * 99) + 1);
+                n2 = Math.floor((Math.random() * 99) + 1);
+            } else if (this.level <= 5) {
+                n1 = Math.floor((Math.random() * 500) + 1);
+                n2 = Math.floor((Math.random() * 500) + 1);
             } else {
                 n1 = Math.floor((Math.random() * 999) + 1);
                 n2 = Math.floor((Math.random() * 999) + 1);

@@ -8,8 +8,8 @@
 	<script type="text/javascript" src="js/site.js"></script>
 	<script type="text/javascript" src="js/math.js"></script>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-	<!--<script src="jquery.js"></script>-->
+	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>-->
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script>
 		var operatorMap = {
 			'+': '+',
@@ -25,16 +25,16 @@
 				var v = getURLParameter(item.name);
 				if (v) {
 					var level = parseInt(v);
-					if (level >= 0) {
+					if (level > 0) {
 						item.level = level;
 					}
 				}
 			});
 
 
-			var enabledCalcItems = availCalcItems.filter(item => item.level >= 0);
+			var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
 			if (enabledCalcItems.length == 0) {
-				availCalcItems[0].level = 0;
+				availCalcItems[0].level = 1;
 				enabledCalcItems.push(availCalcItems[0]);
 			}
 
@@ -102,15 +102,14 @@
 </head>
 
 <body>
-	<!--<div id="result">Score: <span id="right"></span> / <span id="total"></span></div>
-
+	<!--
 	<div>
 		<span id="num1"></span> <span id="operator"></span> <span id="num2"></span> =
 		<span> <input id="txtResult" type="number" maxlength="3" /></span>
 		<span> <input id="btnResult" type="button" value="Summit" onclick="onResult();"></span>
 	</div>-->
 
-	<div>Math Test - Click the 'Score' button to get the score</div>
+	<div>Math Test</div>
 	<hr>
 	<div id="divQuestion">
 		<table id="tabQuestions">

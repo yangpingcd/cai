@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/site.js"></script>
+
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+    <script>
+        $(()=>{
+            var cookie=document.cookie;
+            console.log('cookie='+cookie);
+        })
+
+        function updateRangeInput(elem) {
+            $(elem).prev().text($(elem).val());
+
+            var target=$(elem).attr('for');
+            if (target) {
+                $('#'+target).val($(elem).val());
+            }
+
+        }
+
+        function onGoMath() {
+            window.location.href = "math.html?"
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Math Test</h2>
+    <form action="math.html" style="padding-left: 20px">
+        <div class="row">
+            <div class="column1">
+                <label class="container">Addition(+)
+                    <input type="checkbox" id="chkAddition" name="addition" value="1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="column2">
+                <label>Level </label><label>1</label>
+                <input type="range" id="rngAddition" for="chkAddition" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column1">
+                <label class="container">Subtraction(-)
+                    <input type="checkbox" id="chkSubtraction" name="subtraction" value="1" >
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="column2">
+                <label>Level </label><label>1</label> 
+                <input type="range" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column1">
+                <label class="container">Multiplication(&times;)
+                    <input type="checkbox" id="chkMultiplication" name="multiplication" value="1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="column2">
+                <label>Level </label> <label>1</label>
+                <input type="range" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column1">
+                <label class="container">Divition(&divide;)
+                    <input type="checkbox" id="chkDivition" name="divition" value="1">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <div class="column2">
+                <label>Level </label> <label>1</label>
+                <input type="range" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+            </div>
+        </div>
+
+        <div>
+            <label>Count </label> <label>5</label>
+            <input type="range" name="count" min="1" max="30" value="5" oninput="updateRangeInput(this)">
+        </div>
+        <div><input type="submit" value="Go"></div>
+    </form>
+</body>
+
+</html>
