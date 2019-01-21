@@ -18,9 +18,10 @@
                 $(idCheck).prop('checked', v ? true : false);
             }
             var setLevel = function (name, idRange) {
-                var v = Cookies.get(name);
+                var v = parseInt(Cookies.get(name));
                 if (v > 0) {
                     $(idRange).val(v);
+                    updateRangeInput(idRange);
                 }
             }
 
@@ -34,7 +35,6 @@
             setLevel('multiplication_level', '#rangeMultiplication');
             setLevel('division_level', '#rangeDivision');
 
-            //$('input[type="submit"]').val('new');
             $('form').on('submit', function(e) {
                 //e.preventDefault();
                 saveCookie();
