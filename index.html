@@ -35,6 +35,8 @@
             setLevel('multiplication_level', '#rangeMultiplication');
             setLevel('division_level', '#rangeDivision');
 
+            setLevel('count', '#rangeCount');
+
             $('form').on('submit', function(e) {
                 //e.preventDefault();
                 saveCookie();
@@ -60,8 +62,10 @@
 
             saveLevel('addition_level', "#rangeAddition");
             saveLevel('subtraction_level', "#rangeSubtraction");
-            saveLevel('mulitplication_level', "#rangeMultiplication");
+            saveLevel('multiplication_level', "#rangeMultiplication");
             saveLevel('division_level', "#rangeDivision");
+
+            saveLevel('count', '#rangeCount');
         }
 
         function updateRangeInput(elem) {
@@ -138,7 +142,7 @@
                 <label>How many tests: </label>
             </div>
             <div class="column2"> <label>5</label>
-                <input type="range" name="count" min="1" max="30" value="5" oninput="updateRangeInput(this)">
+                <input type="range" id="rangeCount" name="count" min="1" max="30" value="5" oninput="updateRangeInput(this)">
             </div>
         </div>
     </form>
