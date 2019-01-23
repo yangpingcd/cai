@@ -21,6 +21,10 @@
 		var questionArr = [];
 
 		$(() => {
+			if (getURLParameter('notitle') == 'true') {
+				$('#title').hide();
+			}
+
 			availCalcItems.forEach((item, index) => {
 				var v = getURLParameter(item.name);
 				if (v) {
@@ -109,8 +113,10 @@
 		<span> <input id="btnResult" type="button" value="Summit" onclick="onResult();"></span>
 	</div>-->
 
-	<h2>Math Test</h2>
-	<hr>
+	<div id="title">
+		<h2>Math Test</h2>
+		<hr>
+	</div>
 	<div id="divQuestion">
 		<table id="tabQuestions">
 			<tbody></tbody>
