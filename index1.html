@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="css/site.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="js/site.js"></script>
+
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/js.cookie.js"></script>
+
+    <script>
+        $(() => {
+            var setCheck = function (name, idCheck) {
+                //var v = Cookies.get(name);
+                //$(idCheck).prop('checked', v ? true : false);
+            }
+            var setLevel = function (name, idRange) {
+                //var v = parseInt(Cookies.get(name));
+                //if (v > 0) {
+                //    $(idRange).val(v);
+                //    updateRangeInput(idRange);
+                //}
+            }
+
+            setCheck('addition', '#chkAddition');
+            setCheck('subtraction', '#chkSubtraction');
+            setCheck('multiplication', '#chkMultiplication');
+            setCheck('division', '#chkDivision');
+
+            setLevel('addition_level', '#rangeAddition');
+            setLevel('subtraction_level', '#rangeSubtraction');
+            setLevel('multiplication_level', '#rangeMultiplication');
+            setLevel('division_level', '#rangeDivision');
+
+            setLevel('count', '#rangeCount');
+
+            $('form').on('submit', function (e) {
+                //e.preventDefault();
+                saveCookie();
+            });
+        })
+
+        function saveCookie() {
+            var saveCheck = function (name, idCheck) {
+                if ($(idCheck).prop('checked')) {
+                    Cookies.set(name, 'true');
+                } else {
+                    Cookies.remove(name);
+                }
+            }
+            var saveLevel = function (name, id) {
+                //Cookies.set(name, $(id).val());
+            }
+
+            saveCheck('addition', '#chkAddition');
+            saveCheck('subtraction', '#chkSubtraction');
+            saveCheck('multiplication', '#chkMultiplication');
+            saveCheck('division', '#chkDivision');
+
+            saveLevel('addition_level', "#rangeAddition");
+            saveLevel('subtraction_level', "#rangeSubtraction");
+            saveLevel('multiplication_level', "#rangeMultiplication");
+            saveLevel('division_level', "#rangeDivision");
+
+            saveLevel('count', '#rangeCount');
+        }
+
+        function updateRangeInput(elem) {
+            var value = $(elem).val();
+            //$(elem).prevAll('label:first').text(value);
+
+            var target = $(elem).attr('for');
+            if (target) {
+                $('#' + target).text(value);
+            }
+
+            onGoMath();
+        }
+
+        function onGoMath() {
+            var params = [];
+            if ($('#chkAddition').prop('checked')) {
+                params.push('addition=' + $('#rangeAddition').val());
+            }
+            if ($('#chkSubtraction').prop('checked')) {
+                params.push('subtraction=' + $('#rangeSubtraction').val());
+            }
+            if ($('#chkMultiplication').prop('checked')) {
+                params.push('multiplication=' + $('#rangeMultiplication').val());
+            }
+            if ($('#chkDivision').prop('checked')) {
+                params.push('division=' + $('#rangeDivision').val());
+            }
+
+            params.push('count=' + $('#rangeCount').val());
+            $('iframe').prop('src', 'math.html?' + params.join('&'));
+            //window.location.href = 
+        }
+    </script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="column1">
+            <form action="math.html">
+                <h2>Math Test
+                    <!--<span><input type="submit" value="Go"></span>-->
+                </h2>
+
+                <div class="row">
+                    <div>
+                        <label class="container">Addition(+) Level <label id="lblAddtionLevel">1</label>
+                            <input type="checkbox" id="chkAddition" name="addition" value="1">
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <div class="range">
+                            <input type="range" id="rangeAddition" for="lblAddtionLevel" min="1" max="9" value="1"
+                                oninput="updateRangeInput(this)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column1">
+                        <label class="container">Subtraction(-) Level <label id="lblSubtractionLevel">1</label>
+                            <input type="checkbox" id="chkSubtraction" name="subtraction" value="1">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="range">
+                        <input type="range" id="rangeSubtraction" for="lblSubtractionLevel" min="1" max="9" value="1"
+                            oninput="updateRangeInput(this)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column1">
+                        <label class="container">Multiplication(&times;) Level <label id="lblMultiplictaionLevel">1</label>
+                            <input type="checkbox" id="chkMultiplication" name="multiplication" value="1">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="range">
+
+                        <input type="range" id="rangeMultiplication" for="lblMultiplictaionLevel" min="1" max="9" value="1"
+                            oninput="updateRangeInput(this)">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column1">
+                        <label class="container">Division(&divide;) Level <label id="lblDivisionLevel">1</label>
+                            <input type="checkbox" id="chkDivision" name="division" value="1">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="range">
+                        <input type="range" id="rangeDivision" for="lblDivisionLevel" min="1" max="9" value="1" oninput="updateRangeInput(this)">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="column1">
+                        <label>How many tests: </label> <label id="lblCount">5</label>
+                    </div>
+                    <div class="range">
+                        <input type="range" id="rangeCount" for="lblCount" name="count" min="1" max="30" value="5"
+                            oninput="updateRangeInput(this)">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="column2">
+            <iframe src="math.html"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>
