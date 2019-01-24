@@ -37,10 +37,6 @@
 
             setLevel('count', '#rangeCount');
 
-            $('form').on('submit', function (e) {
-                //e.preventDefault();
-                saveCookie();
-            });
 
             $('input[type="range"').change(function (e) {
                 var forLabel = $(this).attr('forLabel');
@@ -48,10 +44,8 @@
                     $(forLabel).text($(this).val());
                 }
                 var forCheck = $(this).attr('forCheck');
-                if (forCheck) {
-                    if ($(forCheck).prop('checked')) {
-                        onGoMath();
-                    }
+                if (!forCheck || $(forCheck).prop('checked')) {
+                    onGoMath();
                 }
             })
 
