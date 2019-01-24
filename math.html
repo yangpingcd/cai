@@ -60,6 +60,24 @@
 			showQuestion();
 		});
 
+		function refresh() {
+			var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
+			if (enabledCalcItems.length == 0) {
+				availCalcItems[0].level = 1;
+				enabledCalcItems.push(availCalcItems[0]);
+			}
+
+			var count = questionArr.length;
+			questionArr = [];
+			for (var i = 0; i < count; i++) {
+				var indexCalc = Math.floor(Math.random() * enabledCalcItems.length);
+				calcItem = enabledCalcItems[indexCalc];
+				questionArr.push(calcItem.generateQuestion());
+			}
+
+			showQuestion();
+		}
+
 		function showQuestion() {
 			var tbody = $('#tabQuestions tbody').empty();
 			var even = true;
@@ -125,7 +143,10 @@
 
 	<hr>
 	<div id="divScore">
-		<span> <input id="btnResult" type="button" value="Score" onclick="onResult();"></span>
+		<span>
+			<input id="btnRefresh" type="button" value="Refresh" onclick="refresh();">&nbsp;&nbsp;
+			<input id="btnResult" type="button" value="Score" onclick="onResult();">
+		</span>
 		<span id="score"></span>
 	</div>
 </body>
