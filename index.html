@@ -42,12 +42,17 @@
                 saveCookie();
             });
 
-            $('input[type="range"').change(function(e){
-                var forLabel=$(this).attr('forLabel');                
+            $('input[type="range"').change(function (e) {
+                var forLabel = $(this).attr('forLabel');
                 if (forLabel) {
                     $(forLabel).text($(this).val());
                 }
-                //console.log("range changed");
+                var forCheck = $(this).attr('forCheck');
+                if (forCheck) {
+                    if ($(forCheck).prop('checked')) {
+                        onGoMath();
+                    }
+                }
             })
 
             $(':checkbox').change(function () {
@@ -127,67 +132,65 @@
 
     <div class="row">
         <div class="column1">
-            <form action="math.html">
-                <div class="row">
-                    <div>
-                        <label class="container">Addition(+) Level <label id="lblAddtionLevel">1</label>
-                            <input type="checkbox" id="chkAddition" name="addition" value="1">
-                            <span class="checkmark"></span>
-                        </label>
+            <div class="row">
+                <div>
+                    <label class="container">Addition(+) Level <label id="lblAddtionLevel">1</label>
+                        <input type="checkbox" checked id="chkAddition" name="addition" value="1">
+                        <span class="checkmark"></span>
+                    </label>
 
-                        <div class="range">
-                            <input type="range" id="rangeAddition" forLabel="#lblAddtionLevel" for="lblAddtionLevel" min="1" max="9" value="1"
-                                oninput="updateRangeInput(this)">
-                        </div>
+                    <div class="range">
+                        <input type="range" id="rangeAddition" forLabel="#lblAddtionLevel" forCheck="#chkAddition" min="1"
+                            max="9" value="1">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="column1">
-                        <label class="container">Subtraction(-) Level <label id="lblSubtractionLevel">1</label>
-                            <input type="checkbox" id="chkSubtraction" name="subtraction" value="1">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="range">
-                        <input type="range" id="rangeSubtraction" for="lblSubtractionLevel" min="1" max="9" value="1"
-                            oninput="updateRangeInput(this)">
-                    </div>
+            </div>
+            <div class="row">
+                <div class="column1">
+                    <label class="container">Subtraction(-) Level <label id="lblSubtractionLevel">1</label>
+                        <input type="checkbox" checked id="chkSubtraction" name="subtraction" value="1">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
-                <div class="row">
-                    <div class="column1">
-                        <label class="container">Multiplication(&times;) Level <label id="lblMultiplictaionLevel">1</label>
-                            <input type="checkbox" id="chkMultiplication" name="multiplication" value="1">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="range">
+                <div class="range">
+                    <input type="range" id="rangeSubtraction" forLabel="#lblSubtractionLevel" forCheck="#chkSubtraction"
+                        min="1" max="9" value="1">
+                </div>
+            </div>
+            <div class="row">
+                <div class="column1">
+                    <label class="container">Multiplication(&times;) Level <label id="lblMultiplictaionLevel">1</label>
+                        <input type="checkbox" checked id="chkMultiplication" name="multiplication" value="1">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="range">
 
-                        <input type="range" id="rangeMultiplication" for="lblMultiplictaionLevel" min="1" max="9" value="1"
-                            oninput="updateRangeInput(this)">
-                    </div>
+                    <input type="range" id="rangeMultiplication" forLabel="#lblMultiplictaionLevel" forCheck="#chkMultiplictaion"
+                        min="1" max="9" value="1">
                 </div>
-                <div class="row">
-                    <div class="column1">
-                        <label class="container">Division(&divide;) Level <label id="lblDivisionLevel">1</label>
-                            <input type="checkbox" id="chkDivision" name="division" value="1">
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="range">
-                        <input type="range" id="rangeDivision" for="lblDivisionLevel" min="1" max="9" value="1" oninput="updateRangeInput(this)">
-                    </div>
+            </div>
+            <div class="row">
+                <div class="column1">
+                    <label class="container">Division(&divide;) Level <label id="lblDivisionLevel">1</label>
+                        <input type="checkbox" id="chkDivision" name="division" value="1">
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
+                <div class="range">
+                    <input type="range" id="rangeDivision" forLabel="#lblDivisionLevel" forCheck="#chkDivision" min="1"
+                        max="9" value="1">
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="column1">
-                        <label>How many tests: </label> <label id="lblCount">10</label>
-                    </div>
-                    <div class="range">
-                        <input type="range" id="rangeCount" for="lblCount" name="count" min="1" max="30" value="10"
-                            oninput="updateRangeInput(this)">
-                    </div>
+            <div class="row">
+                <div class="column1">
+                    <label>How many tests: </label> <label id="lblCount">10</label>
                 </div>
-            </form>
+                <div class="range">
+                    <input type="range" id="rangeCount" forLabel="lblCount" name="count" min="1" max="30" value="10">
+                </div>
+            </div>
         </div>
 
         <div class="column2">
