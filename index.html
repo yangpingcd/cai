@@ -12,17 +12,25 @@
     <script type="text/javascript" src="js/js.cookie.js"></script>
 
     <script>
+        $(window).on('unload', () => {
+            saveCookie();
+        })
+
         $(() => {
             var setCheck = function (name, idCheck) {
-                //var v = Cookies.get(name);
-                //$(idCheck).prop('checked', v ? true : false);
+                var v = Cookies.get(name);
+                $(idCheck).prop('checked', v ? true : false);
             }
             var setLevel = function (name, idRange) {
-                //var v = parseInt(Cookies.get(name));
-                //if (v > 0) {
-                //    $(idRange).val(v);
-                //    updateRangeInput(idRange);
-                //}
+                var v = parseInt(Cookies.get(name));
+                if (v > 0) {
+                    $(idRange).val(v);
+
+                    var forLabel = $(idRange).attr('forLabel');
+                    if (forLabel) {
+                        $(forLabel).text($(idRange).val());
+                    }
+                }
             }
 
             setCheck('addition', '#chkAddition');
@@ -65,7 +73,7 @@
                 }
             }
             var saveLevel = function (name, id) {
-                //Cookies.set(name, $(id).val());
+                Cookies.set(name, $(id).val());
             }
 
             saveCheck('addition', '#chkAddition');
@@ -79,22 +87,6 @@
             saveLevel('division_level', "#rangeDivision");
 
             saveLevel('count', '#rangeCount');
-        }
-
-        function updateRangeInput(elem) {
-            var needReload = false;
-
-            var value = $(elem).val();
-            //$(elem).prevAll('label:first').text(value);
-
-            var target = $(elem).attr('for');
-            if (target) {
-                $('#' + target).text(value);
-            }
-
-            if (needReload) {
-                onGoMath();
-            }
         }
 
         function onGoMath() {
