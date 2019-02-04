@@ -19,7 +19,16 @@
             saveCookie();
         })
 
+        function window_onresize() {
+            console.log('window.innerHeight=' + window.innerHeight);
+            console.log('.header=' + $('.header').height());
+            $('.column1').outerHeight(window.innerHeight - $('.header').outerHeight());
+        }
+        $(window).resize(window_onresize);
+
         $(() => {
+            window_onresize();
+
             var setCheck = function (name, idCheck) {
                 var v = Cookies.get(name);
                 $(idCheck).prop('checked', v ? true : false);
@@ -299,7 +308,7 @@
 
             <div class="row">
                 <div>
-                    <label>How many tests: </label> <label id="lblCount">10</label>
+                    <label style="padding-left:35px;">How many tests: </label> <label id="lblCount">10</label>
                 </div>
                 <div class="range">
                     <input type="range" id="rangeCount" forLabel="#lblCount" name="count" min="1" max="30" value="10">
