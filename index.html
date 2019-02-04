@@ -54,10 +54,8 @@
             setLevel('count', '#rangeCount');
 
             // set addition checked if none of them is checked
-            var hasCheck = ['#chkAddition', '#chkSubtraction', '#chkMultiplication', '#chkDivision'].reduce((total, cur) => {
-                if ($(cur).prop('checked')) {
-                    total = true;
-                }
+            var hasCheck = ['#chkAddition', '#chkSubtraction', '#chkMultiplication', '#chkDivision'].reduce((hasCheck, cur) => {
+                return $(cur).prop('checked') ? true : hasCheck;
             }, false)
             if (!hasCheck) {
                 $('#chkAddition').prop('checked', true);
