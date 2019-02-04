@@ -5,10 +5,11 @@
 	<title>test</title>
 	<style>
 		body {
-			font-size: 50px;
-			height: 100%
+			/*font-size: 50px;
+			height: 100%*/
+			margin:0px 0px 0px 0px;
 		}
-		input {
+		/*input {
 			font-size: 50px;
 		}
 		#txtResult {
@@ -25,6 +26,11 @@
 		}
 		.wrong {
 			color: red;
+		}*/
+
+		.header {
+			background-color: #666;
+			
 		}
 	</style>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
@@ -45,90 +51,14 @@
 
 	<script>
 
-		var right = 0;
-		var total = 0;
-		var num1;
-		var num2;
-		var operator = '-'; // 0=multiple, 1=divide
 
-		// &divide; or &#247;
-		// &times; or &#215;
-
-		$(() => {
-			initNumber();
-			showResult();
-		});
-
-		function showResult() {
-			$("#right").text(right);
-			$("#total").text(total);
-		}
-
-		function initNumber() {
-			num1 = Math.floor((Math.random() * 100) + 1);
-			num2 = Math.floor((Math.random() * 100) + 1);
-			/*operator = '*';
-			if (Math.random() >= 0.5 && allowDivide) {
-				operator = 1;
-				num1 = num1 * num2;
-			}*/
-
-			if (num1 < num2) {
-				var temp = num1; num1=num2; num2 = temp;
-			}
-
-
-			$("#num1").text(num1);
-			$("#num2").text(num2);
-			$("#operator").html(operator == '-' ? "-" : "+");
-			$("#txtResult").val("").focus();
-		}
-
-		function onResult() {
-			var r = $("#txtResult").val();
-			if (r == "") {
-				$("#txtResult").focus();
-				return;
-			}
-
-			if ((operator == '-' && num1 - num2 == r) ||
-				(operator == '+' && num1 + num2 == r)) {
-				right++;
-			}
-			total++;
-			showResult();
-			log(r);
-
-			initNumber();
-		}
-
-		function log(r) {
-			var s = num1 + " " + (operator == '-' ? "-" : "+") + " " + num2 + " = " + r;
-			var item = $("<div/>").html(s);
-
-			if ((operator == '-' && num1 - num2 == r) ||
-				(operator == '+' && num1 + num2 == r)) {
-				item.addClass("right");
-			} else {
-				item.addClass("wrong");
-			}
-			$("#log").append(item);
-		}
 	</script>
 
 </head>
 
 <body>
-	<div id="result">Score: <span id="right"></span> / <span id="total"></span></div>
-
-	<div>
-		<span id="num1"></span> <span id="operator"></span> <span id="num2"></span> =
-		<span> <input id="txtResult" type="number" maxlength="3" /></span>
-		<span> <input id="btnResult" type="button" value="Summit" onclick="onResult();"></span>
-	</div>
-
-
-	<div id="log">
+	<div class="header">
+		title
 	</div>
 </body>
 

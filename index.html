@@ -5,11 +5,14 @@
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" href="css/site.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/math.css">
     <script type="text/javascript" src="js/site.js"></script>
+
 
     <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>-->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/js.cookie.js"></script>
+    <script type="text/javascript" src="js/math.js"></script>
 
     <script>
         $(window).on('unload', () => {
@@ -90,8 +93,22 @@
         }
 
         function onGoMath() {
-            var params = ["notitle=true"];
-            if ($('#chkAddition').prop('checked')) {
+            setAvail = function (name, level) {
+                availCalcItems.forEach((item, index) => {
+                    if (item.name == name) {
+                        item.level = level;
+                    }
+                });
+            }
+
+            setAvail('addition', $('#chkAddition').prop('checked') ? parseInt($('#rangeAddition').val()) : 0);
+            setAvail('subtraction', $('#chkSubtraction').prop('checked') ? parseInt($('#rangeSubtraction').val()) : 0);
+            setAvail('multiplication', $('#chkMultiplication').prop('checked') ? parseInt($('#rangeMultiplication').val()) : 0);
+            setAvail('division', $('#chkDivision').prop('checked') ? parseInt($('#rangeDivision').val()) : 0);
+
+            questionArr = new Array(parseInt($('#rangeCount').val()));
+
+            /*if ($('#chkAddition').prop('checked')) {
                 params.push('addition=' + $('#rangeAddition').val());
             }
             if ($('#chkSubtraction').prop('checked')) {
@@ -102,21 +119,132 @@
             }
             if ($('#chkDivision').prop('checked')) {
                 params.push('division=' + $('#rangeDivision').val());
+            }*/
+
+            //params.push('count=' + $('#rangeCount').val());
+            //$('iframe').prop('src', 'math.html?' + params.join('&'));
+
+
+
+            refresh();
+        }
+    </script>
+
+    <script>
+        var operatorMap = {
+            '+': '+',
+            '-': '-',
+            '*': '&times;', // &times; or &#215;
+            '/': '&divide;' // &divide; or &#247;
+        }
+
+        var questionArr = [];
+
+        /*$(() => {            
+            availCalcItems.forEach((item, index) => {
+                var v = getURLParameter(item.name);
+                if (v) {
+                    var level = parseInt(v);
+                    if (level > 0) {
+                        item.level = level;
+                    }
+                }
+            });
+
+
+            var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
+            if (enabledCalcItems.length == 0) {
+                availCalcItems[0].level = 1;
+                enabledCalcItems.push(availCalcItems[0]);
             }
 
-            params.push('count=' + $('#rangeCount').val());
-            $('iframe').prop('src', 'math.html?' + params.join('&'));
-            //window.location.href = 
+            var count = 5;
+            var strCount = getURLParameter("count");
+            if (strCount) {
+                count = parseInt(strCount);
+                if (isNaN(count) || count < 1 || count > 50) {
+                    count = 5;
+                }
+            }
+
+            for (var i = 0; i < count; i++) {
+                var indexCalc = Math.floor(Math.random() * enabledCalcItems.length);
+                calcItem = enabledCalcItems[indexCalc];
+                questionArr.push(calcItem.generateQuestion());
+            }
+
+            showQuestion();
+        });*/
+
+        function refresh() {
+            var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
+            if (enabledCalcItems.length == 0) {
+                availCalcItems[0].level = 1;
+                enabledCalcItems.push(availCalcItems[0]);
+            }
+
+            var count = (questionArr.length > 0 ? questionArr.length : 5);
+            questionArr = [];
+            for (var i = 0; i < count; i++) {
+                var indexCalc = Math.floor(Math.random() * enabledCalcItems.length);
+                calcItem = enabledCalcItems[indexCalc];
+                questionArr.push(calcItem.generateQuestion());
+            }
+
+            showQuestion();
         }
+
+        function showQuestion() {
+            var tbody = $('#tabQuestions tbody').empty();
+            var even = true;
+            var addRow = function (q, index) {
+                var n1 = $('<td></td>').append($('<span id="num1"></span>').text(' ' + q.num1 + ' '));
+                var n2 = $('<td></td>').append($('<span id="num2"></span>').text(' ' + q.num2 + ' '));
+                var op = $('<td></td>').append($('<span id="operator"></span>').html(operatorMap[q.calcItem.operator]));
+                var r = $('<td></td>').append($('<span> = </span>').append(
+                    $('<input type="number" class="txtResult" id="txtResult' + index + '"></input>')));
+
+                //divRow.append(n1).append(op).append(n2).append($('</span> = <span>')).append(result);
+                //var td1 = .append(n1).append(op).append(n2);
+                //var td2 = $('<td></td>').append($('</span> = <span>')).append(result);
+                tbody.append(
+                    $('<tr></tr>').addClass(even ? 'd0' : 'd1').append(n1).append(op).append(n2).append(r)
+                );
+
+                even = !even;
+            }
+
+            questionArr.forEach((q, index) => {
+                addRow(q, index);
+            })
+        }
+
+        function onResult() {
+            var score = 0;
+
+            questionArr.forEach((q, index) => {
+                var txtResult = $('#txtResult' + index);
+                var v = parseInt(txtResult.val());
+                if (v == q.answer) {
+                    txtResult.removeClass('wrong').addClass('right');
+                    score++;
+                } else {
+                    txtResult.removeClass('right').addClass('wrong');
+                }
+            });
+
+            $('#score').text(' ' + score + ' / ' + questionArr.length);
+        }
+
     </script>
 </head>
 
 <body>
-    <h2>Math Test
-        <hr>
-    </h2>
+    <div class="header">
+        Math Test
+    </div>
 
-    <div class="row">
+    <div >
         <div class="column1">
             <div class="row">
                 <div>
@@ -132,7 +260,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="column1">
+                <div>
                     <label class="container">Subtraction(-) Level <label id="lblSubtractionLevel">1</label>
                         <input type="checkbox" id="chkSubtraction" name="subtraction" value="1">
                         <span class="checkmark"></span>
@@ -144,7 +272,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="column1">
+                <div>
                     <label class="container">Multiplication(&times;) Level <label id="lblMultiplicationLevel">1</label>
                         <input type="checkbox" id="chkMultiplication" name="multiplication" value="1">
                         <span class="checkmark"></span>
@@ -157,7 +285,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="column1">
+                <div>
                     <label class="container">Division(&divide;) Level <label id="lblDivisionLevel">1</label>
                         <input type="checkbox" id="chkDivision" name="division" value="1">
                         <span class="checkmark"></span>
@@ -170,7 +298,7 @@
             </div>
 
             <div class="row">
-                <div class="column1">
+                <div>
                     <label>How many tests: </label> <label id="lblCount">10</label>
                 </div>
                 <div class="range">
@@ -180,7 +308,20 @@
         </div>
 
         <div class="column2">
-            <iframe></iframe>
+            <div id="divQuestion">
+                <table id="tabQuestions">
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <hr>
+            <div id="divScore">
+                <span>
+                    <input id="btnRefresh" type="button" value="Refresh" onclick="refresh();">&nbsp;&nbsp;
+                    <input id="btnResult" type="button" value="Score" onclick="onResult();">
+                </span>
+                <span id="score"></span>
+            </div>
         </div>
     </div>
 </body>
