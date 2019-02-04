@@ -54,9 +54,9 @@
             setLevel('count', '#rangeCount');
 
             // set addition checked if none of them is checked
-            var hasCheck=['#chkAddition', '#chkSubtraction', '#chkMultiplication', '#chkDivision'].reduce((hasCheck, cur) => {
+            var hasCheck = ['#chkAddition', '#chkSubtraction', '#chkMultiplication', '#chkDivision'].reduce((total, cur) => {
                 if ($(cur).prop('checked')) {
-                    hasCheck = true;
+                    total = true;
                 }
             }, false)
             if (!hasCheck) {
@@ -121,7 +121,7 @@
             setAvail('multiplication', $('#chkMultiplication').prop('checked') ? parseInt($('#rangeMultiplication').val()) : 0);
             setAvail('division', $('#chkDivision').prop('checked') ? parseInt($('#rangeDivision').val()) : 0);
 
-            questionArr = new Array(parseInt($('#rangeCount').val()));            
+            questionArr = new Array(parseInt($('#rangeCount').val()));
             refresh();
         }
     </script>
@@ -135,7 +135,7 @@
         }
 
         var questionArr = [];
-        
+
         function refresh() {
             var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
             if (enabledCalcItems.length == 0) {
@@ -204,7 +204,7 @@
         Math Test
     </div>
 
-    <div >
+    <div>
         <div class="column1">
             <div class="row">
                 <div>
