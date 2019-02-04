@@ -18,16 +18,12 @@
         $(window).on('unload', () => {
             saveCookie();
         })
-
-        function window_onresize() {
-            console.log('window.innerHeight=' + window.innerHeight);
-            console.log('.header=' + $('.header').height());
+        $(window).resize(() => {
             $('.column1').outerHeight(window.innerHeight - $('.header').outerHeight());
-        }
-        $(window).resize(window_onresize);
+        });
 
         $(() => {
-            window_onresize();
+            window.dispatchEvent(new Event('resize'));
 
             var setCheck = function (name, idCheck) {
                 var v = Cookies.get(name);
@@ -56,6 +52,16 @@
             setLevel('division_level', '#rangeDivision');
 
             setLevel('count', '#rangeCount');
+
+            // set addition checked if none of them is checked
+            var hasCheck=['#chkAddition', '#chkSubtraction', '#chkMultiplication', '#chkDivision'].reduce((hasCheck, cur) => {
+                if ($(cur).prop('checked')) {
+                    hasCheck = true;
+                }
+            }, false)
+            if (!hasCheck) {
+                $('#chkAddition').prop('checked', true);
+            }
 
 
             $('input[type="range"').change(function (e) {
@@ -115,26 +121,7 @@
             setAvail('multiplication', $('#chkMultiplication').prop('checked') ? parseInt($('#rangeMultiplication').val()) : 0);
             setAvail('division', $('#chkDivision').prop('checked') ? parseInt($('#rangeDivision').val()) : 0);
 
-            questionArr = new Array(parseInt($('#rangeCount').val()));
-
-            /*if ($('#chkAddition').prop('checked')) {
-                params.push('addition=' + $('#rangeAddition').val());
-            }
-            if ($('#chkSubtraction').prop('checked')) {
-                params.push('subtraction=' + $('#rangeSubtraction').val());
-            }
-            if ($('#chkMultiplication').prop('checked')) {
-                params.push('multiplication=' + $('#rangeMultiplication').val());
-            }
-            if ($('#chkDivision').prop('checked')) {
-                params.push('division=' + $('#rangeDivision').val());
-            }*/
-
-            //params.push('count=' + $('#rangeCount').val());
-            //$('iframe').prop('src', 'math.html?' + params.join('&'));
-
-
-
+            questionArr = new Array(parseInt($('#rangeCount').val()));            
             refresh();
         }
     </script>
@@ -148,43 +135,7 @@
         }
 
         var questionArr = [];
-
-        /*$(() => {            
-            availCalcItems.forEach((item, index) => {
-                var v = getURLParameter(item.name);
-                if (v) {
-                    var level = parseInt(v);
-                    if (level > 0) {
-                        item.level = level;
-                    }
-                }
-            });
-
-
-            var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
-            if (enabledCalcItems.length == 0) {
-                availCalcItems[0].level = 1;
-                enabledCalcItems.push(availCalcItems[0]);
-            }
-
-            var count = 5;
-            var strCount = getURLParameter("count");
-            if (strCount) {
-                count = parseInt(strCount);
-                if (isNaN(count) || count < 1 || count > 50) {
-                    count = 5;
-                }
-            }
-
-            for (var i = 0; i < count; i++) {
-                var indexCalc = Math.floor(Math.random() * enabledCalcItems.length);
-                calcItem = enabledCalcItems[indexCalc];
-                questionArr.push(calcItem.generateQuestion());
-            }
-
-            showQuestion();
-        });*/
-
+        
         function refresh() {
             var enabledCalcItems = availCalcItems.filter(item => item.level > 0);
             if (enabledCalcItems.length == 0) {
