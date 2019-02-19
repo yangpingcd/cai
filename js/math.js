@@ -44,7 +44,7 @@ var availCalcItems = [
             } else if (this.level <= 4) {
                 n1 = Math.floor((Math.random() * 99) + 1);
                 n2 = Math.floor((Math.random() * 99) + 1);
-            } else if (this.level <= 4) {
+            } else if (this.level <= 5) {
                 n1 = Math.floor((Math.random() * 500) + 1);
                 n2 = Math.floor((Math.random() * 500) + 1);
                 if (n1 > n2) {
@@ -52,9 +52,17 @@ var availCalcItems = [
                 } else {
                     n2 = n2 - n1;
                 }
-            } else {
+            } else if (this.level <= 6) {
                 n1 = Math.floor((Math.random() * 999) + 1);
                 n2 = Math.floor((Math.random() * 999) + 1);
+            } else {
+                n1 = Math.floor((Math.random() * 9999) + 1);
+                n2 = Math.floor((Math.random() * 9999) + 1);
+                if (n1 > n2) {
+                    n1 = n1 - n2;
+                } else {
+                    n2 = n2 - n1;
+                }
             }
 
             return new QuestionItem(this, n1, n2, n1 + n2);
@@ -148,7 +156,7 @@ var availCalcItems = [
                 n2 = Math.floor((Math.random() * 999) + 1);
             }
 
-            return new QuestionItem(this, n1*n2, n1, n2);
+            return new QuestionItem(this, n1 * n2, n1, n2);
         }
     )
 ];
