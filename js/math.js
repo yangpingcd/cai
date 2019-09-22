@@ -17,52 +17,37 @@ class QuestionItem {
     }
 }
 
+// generate a random between min and max [min, max)
+function getMinMax(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
 var availCalcItems = [
     new CalcItem("addition", '+',
         function () {
             var n1, n2;
 
             if (this.level <= 1) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 9) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 2) {
-                n1 = Math.floor((Math.random() * 50) + 1);
-                n2 = Math.floor((Math.random() * 50) + 1);
-                if (n1 > n2) {
-                    n1 = n1 - n2;
-                } else {
-                    n2 = n2 - n1;
-                }
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 3) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
-                if (n1 > n2) {
-                    n1 = n1 - n2;
-                } else {
-                    n2 = n2 - n1;
-                }
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(10, 100);
             } else if (this.level <= 4) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(10, 100);
             } else if (this.level <= 5) {
-                n1 = Math.floor((Math.random() * 500) + 1);
-                n2 = Math.floor((Math.random() * 500) + 1);
-                if (n1 > n2) {
-                    n1 = n1 - n2;
-                } else {
-                    n2 = n2 - n1;
-                }
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(100, 1000);
             } else if (this.level <= 6) {
-                n1 = Math.floor((Math.random() * 999) + 1);
-                n2 = Math.floor((Math.random() * 999) + 1);
+                n1 = getMinMax(1000, 10000);
+                n2 = getMinMax(100, 1000);
             } else {
-                n1 = Math.floor((Math.random() * 9999) + 1);
-                n2 = Math.floor((Math.random() * 9999) + 1);
-                if (n1 > n2) {
-                    n1 = n1 - n2;
-                } else {
-                    n2 = n2 - n1;
-                }
+                n1 = getMinMax(1000, 10000);
+                n2 = getMinMax(1000, 10000);
             }
 
             return new QuestionItem(this, n1, n2, n1 + n2);
@@ -73,23 +58,26 @@ var availCalcItems = [
             var n1, n2;
 
             if (this.level <= 1) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 9) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 2) {
-                n1 = Math.floor((Math.random() * 50) + 1);
-                n2 = Math.floor((Math.random() * 50) + 1);
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 3) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(10, 100);
             } else if (this.level <= 4) {
-                n1 = Math.floor((Math.random() * 199) + 1);
-                n2 = Math.floor((Math.random() * 199) + 1);
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(10, 100);
             } else if (this.level <= 5) {
-                n1 = Math.floor((Math.random() * 500) + 1);
-                n2 = Math.floor((Math.random() * 500) + 1);
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(100, 1000);
+            } else if (this.level <= 6) {
+                n1 = getMinMax(1000, 10000);
+                n2 = getMinMax(100, 1000);
             } else {
-                n1 = Math.floor((Math.random() * 999) + 1);
-                n2 = Math.floor((Math.random() * 999) + 1);
+                n1 = getMinMax(1000, 10000);
+                n2 = getMinMax(1000, 10000);
             }
 
             if (n1 < n2) {
@@ -104,23 +92,32 @@ var availCalcItems = [
             var n1, n2;
 
             if (this.level <= 1) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 9) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 2) {
-                n1 = Math.floor((Math.random() * 49) + 1);
-                n2 = Math.floor((Math.random() * 9) + 1);
+                n1 = getMinMax(10, 50);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 3) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 9) + 1);
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 4) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 5) {
-                n1 = Math.floor((Math.random() * 500) + 1);
-                n2 = Math.floor((Math.random() * 500) + 1);
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(10, 100);
+            } else if (this.level <= 6) {
+                n1 = getMinMax(100, 500);
+                n2 = getMinMax(10, 100);
+            } else if (this.level <= 7) {
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(10, 100);
+            } else if (this.level <= 8) {
+                n1 = getMinMax(100, 1000);
+                n2 = getMinMax(10, 100);
             } else {
-                n1 = Math.floor((Math.random() * 999) + 1);
-                n2 = Math.floor((Math.random() * 999) + 1);
+                n1 = getMinMax(1000, 10000);
+                n2 = getMinMax(100, 1000);
             }
 
             return new QuestionItem(this, n1, n2, n1 * n2);
@@ -131,30 +128,30 @@ var availCalcItems = [
             var n1, n2;
 
             if (this.level <= 1) {
-                n1 = Math.floor((Math.random() * 5) + 1);
-                n2 = Math.floor((Math.random() * 5) + 1);
+                n1 = getMinMax(1, 6);
+                n2 = getMinMax(1, 6);
             } else if (this.level <= 2) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 5) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(1, 6);
             } else if (this.level <= 3) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 9) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(1, 10);
             } else if (this.level <= 4) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 49) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(10, 100);
             } else if (this.level <= 5) {
-                n1 = Math.floor((Math.random() * 9) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(100, 1000);
             } else if (this.level <= 6) {
-                n1 = Math.floor((Math.random() * 49) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
+                n1 = getMinMax(1, 10);
+                n2 = getMinMax(1000, 10000);
             } else if (this.level <= 7) {
-                n1 = Math.floor((Math.random() * 99) + 1);
-                n2 = Math.floor((Math.random() * 99) + 1);
-            } else {
-                n1 = Math.floor((Math.random() * 999) + 1);
-                n2 = Math.floor((Math.random() * 999) + 1);
-            }
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(10, 100);
+            } else if (this.level <= 8) {
+                n1 = getMinMax(10, 100);
+                n2 = getMinMax(100, 1000);
+            } 
 
             return new QuestionItem(this, n1 * n2, n1, n2);
         }

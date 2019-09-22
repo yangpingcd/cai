@@ -32,7 +32,15 @@
 	</script>
 
 	<script>
+		$(()=>{
+			var mykey = 'mykey';
+			var myval = localStorage.getItem(mykey);
 
+			$('div label').val(myval);
+
+			var v=[1,2];
+			localStorage.setItem(mykey, v);	
+		})
 
 	</script>
 
