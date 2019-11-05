@@ -151,6 +151,9 @@ var availCalcItems = [
             } else if (this.level <= 8) {
                 n1 = getMinMax(10, 100);
                 n2 = getMinMax(100, 1000);
+            } else {
+                n1 = getMinMax(50, 100);
+                n2 = getMinMax(100, 1000);
             } 
 
             return new QuestionItem(this, n1 * n2, n1, n2);
