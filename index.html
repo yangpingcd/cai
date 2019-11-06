@@ -3,6 +3,8 @@
 
 <head>
     <title>Welcome</title>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/site.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/math.css">
@@ -11,6 +13,8 @@
 
     <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>-->
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/umd/popper.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/js.cookie.js"></script>
     <script type="text/javascript" src="js/math.js"></script>
 
@@ -124,7 +128,7 @@
         }
     </script>
 
-    <script>        
+    <script>
         var questionArr = [];
 
         function refresh() {
@@ -197,87 +201,90 @@
 </head>
 
 <body>
-    <div class="header">
-        Math Test
+    <div class="header bg-dark text-white">
+        <h3>Math Test</h3>
     </div>
 
-    <div>
-        <div class="column1">
-            <div class="row">
-                <div>
-                    <label class="container">Addition(+) Level <label id="lblAddtionLevel">1</label>
-                        <input type="checkbox" id="chkAddition" name="addition" value="1">
-                        <span class="checkmark"></span>
+    <div class="container">
+        <div class="row">
+            <div class="col bg-light" style="width:300px;">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="chkAddition" name="addition" value="1">
+                    <label class="custom-control-label" for="chkAddition">Addition(+) Level <label
+                            id="lblAddtionLevel">1</label>
                     </label>
-
                     <div>
-                        <input type="range" id="rangeAddition" forLabel="#lblAddtionLevel" forCheck="#chkAddition" min="1"
-                            max="9" value="1">
+                        <input type="range" id="rangeAddition" forLabel="#lblAddtionLevel" forCheck="#chkAddition"
+                            min="1" max="9" value="1">
+                    </div>
+                </div>
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="chkSubtraction" name="subtraction"
+                        value="1">
+                    <label class="custom-control-label" for="chkSubtraction">Subtraction(-) Level <label
+                            id="lblSubtractionLevel">1</label>
+                    </label>
+                    <div>
+                        <input type="range" id="rangeSubtraction" forLabel="#lblSubtractionLevel"
+                            forCheck="#chkSubtraction" min="1" max="9" value="1">
+                    </div>
+                </div>
+
+                <div class="custom-control custom-checkbox">
+                    <div>
+                        <input type="checkbox" class="custom-control-input" id="chkMultiplication" name="multiplication"
+                            value="1">
+                        <label class="custom-control-label" for="chkMultiplication">Multiplication(&times;) Level <label
+                                id="lblMultiplicationLevel">1</label>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="range" id="rangeMultiplication" forLabel="#lblMultiplicationLevel"
+                            forCheck="#chkMultiplication" min="1" max="9" value="1">
+                    </div>
+                </div>
+                <div class="custom-control custom-checkbox">
+                    <div>
+                        <input type="checkbox" class="custom-control-input" id="chkDivision" name="division" value="1">
+                        <label class="custom-control-label" for="chkDivision">Division(&divide;) Level <label
+                                id="lblDivisionLevel">1</label>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="range" id="rangeDivision" forLabel="#lblDivisionLevel" forCheck="#chkDivision"
+                            min="1" max="9" value="1">
+                    </div>
+                </div>
+
+                <div class="custom-control">
+                    <div>
+                        <label>How many tests: </label> <label id="lblCount">10</label>
+                    </div>
+                    <div>
+                        <input type="range" id="rangeCount" forLabel="#lblCount" name="count" min="1" max="30"
+                            value="10">
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div>
-                    <label class="container">Subtraction(-) Level <label id="lblSubtractionLevel">1</label>
-                        <input type="checkbox" id="chkSubtraction" name="subtraction" value="1">
-                        <span class="checkmark"></span>
-                    </label>
+
+            <div class="col">
+                <div id="divQuestion">
+                    <table id="tabQuestions">
+                        <tbody></tbody>
+                    </table>
                 </div>
-                <div>
-                    <input type="range" id="rangeSubtraction" forLabel="#lblSubtractionLevel" forCheck="#chkSubtraction"
-                        min="1" max="9" value="1">
-                </div>
-            </div>
-            <div class="row">
-                <div>
-                    <label class="container">Multiplication(&times;) Level <label id="lblMultiplicationLevel">1</label>
-                        <input type="checkbox" id="chkMultiplication" name="multiplication" value="1">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div>
-                    <input type="range" id="rangeMultiplication" forLabel="#lblMultiplicationLevel" forCheck="#chkMultiplication"
-                        min="1" max="9" value="1">
-                </div>
-            </div>
-            <div class="row">
-                <div>
-                    <label class="container">Division(&divide;) Level <label id="lblDivisionLevel">1</label>
-                        <input type="checkbox" id="chkDivision" name="division" value="1">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
-                <div>
-                    <input type="range" id="rangeDivision" forLabel="#lblDivisionLevel" forCheck="#chkDivision" min="1"
-                        max="9" value="1">
+
+                <hr>
+                <div id="divScore">
+                    <span>
+                        <input id="btnRefresh" type="button" value="Refresh" onclick="refresh();">&nbsp;&nbsp;
+                        <input id="btnResult" type="button" value="Score" onclick="onResult();">
+                    </span>
+                    <span id="score"></span>
                 </div>
             </div>
 
-            <div class="row">
-                <div>
-                    <label style="padding-left:35px;">How many tests: </label> <label id="lblCount">10</label>
-                </div>
-                <div>
-                    <input type="range" id="rangeCount" forLabel="#lblCount" name="count" min="1" max="30" value="10">
-                </div>
-            </div>
-        </div>
-
-        <div class="column2">
-            <div id="divQuestion">
-                <table id="tabQuestions">
-                    <tbody></tbody>
-                </table>
-            </div>
-
-            <hr>
-            <div id="divScore">
-                <span>
-                    <input id="btnRefresh" type="button" value="Refresh" onclick="refresh();">&nbsp;&nbsp;
-                    <input id="btnResult" type="button" value="Score" onclick="onResult();">
-                </span>
-                <span id="score"></span>
-            </div>
         </div>
     </div>
 </body>

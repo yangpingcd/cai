@@ -42,14 +42,14 @@ input[type='range'] {
     vertical-align: middle;
 }
 /* Clear floats after the columns */
-.row:after {
+/*.row:after {
     content: "";
     display: table;
     clear: both;
-}
+}*/
 
 /* The container */
-.container {
+/*.container {
     display: block;
     position: relative;
     padding-left: 35px;
@@ -60,16 +60,16 @@ input[type='range'] {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
+}*/
 
 /* Hide the browser's default checkbox */
-.container input {
+/*.container input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
-}
+}*/
   
   /* Create a custom checkbox */
 .checkmark {
@@ -82,7 +82,7 @@ input[type='range'] {
 }
   
 /* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
+/*.container:hover input ~ .checkmark {
     background-color: #aaa;
 }
   
