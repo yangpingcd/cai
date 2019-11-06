@@ -1,10 +1,10 @@
-
-.txtResult {
-    width: 150px;
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
-#log {
-    margin-top: 10px;
-    font-size: 20px;
-    overflow-y: scroll;
-    height: auto;
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
 }

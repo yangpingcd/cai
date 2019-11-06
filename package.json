@@ -1,7 +1,7 @@
 {
   "name": "cai",
   "version": "1.0.0",
-  "description": "",
+  "description": "A math test for kids",
   "main": "index.js",
   "dependencies": {
     "bootstrap": "^4.3.1",
