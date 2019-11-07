@@ -164,14 +164,15 @@
                 var n1 = $('<td></td>').append($('<span id="num1"></span>').text(' ' + q.num1 + ' '));
                 var n2 = $('<td></td>').append($('<span id="num2"></span>').text(' ' + q.num2 + ' '));
                 var op = $('<td></td>').append($('<span id="operator"></span>').html(operatorMap[q.calcItem.operator]));
-                var r = $('<td></td>').append($('<span> = </span>').append(
-                    $('<input type="number" class="txtResult" id="txtResult' + index + '"></input>')));
+                var eq = $('<td></td>').append($('<span> = </span>'));
+                var r = $('<td></td>').append(
+                    $('<input type="number" class="form-control" id="txtResult' + index + '"></input>'));
 
                 //divRow.append(n1).append(op).append(n2).append($('</span> = <span>')).append(result);
                 //var td1 = .append(n1).append(op).append(n2);
                 //var td2 = $('<td></td>').append($('</span> = <span>')).append(result);
                 tbody.append(
-                    $('<tr></tr>').addClass(even ? 'd0' : 'd1').append(n1).append(op).append(n2).append(r)
+                    $('<tr></tr>').addClass(even ? 'd0' : 'd1').append(n1).append(op).append(n2).append(eq).append(r)
                 );
 
                 even = !even;
@@ -211,7 +212,7 @@
 
     <div class="container body-content">
         <div class="row">
-            <div class="col mt-3" style="width:300px;">
+            <div class="col mt-3" style="flex:0 0 300px;">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="chkAddition" name="addition" value="1">
                     <label class="custom-control-label" for="chkAddition">Addition(+) Level <label
@@ -274,7 +275,7 @@
 
             <div class="col mt-3">
                 <div id="divQuestion">
-                    <table id="tabQuestions">
+                    <table id="tabQuestions" class="text-lg">
                         <tbody></tbody>
                     </table>
                 </div>
